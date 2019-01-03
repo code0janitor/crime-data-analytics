@@ -1,0 +1,26 @@
+version: '3'
+
+services:
+  mongodb:
+    image: mongo:4.0.5
+    hostname: mongodb
+    container_name: crime-mongo
+    ports:
+        - "27017:27017"
+    networks:
+        - default
+    environment: 
+        # - MONGODB_PASSWORD=ChangeMe!
+        # - MONGODB_ROOT_PASSWORD=ChangeMe!
+        # - MONGODB_PORT_NUMBER=27017
+        # - MONGODB_PRIMARY_PORT_NUMBER=27017
+        # - MONGODB_PRIMARY_ROOT_PASSWORD=ChangeMe!
+        # - MONGODB_PRIMARY_ROOT_USER=dontletmedown
+        # - MONGODB_USERNAME=incapabletochange
+        - MONGO_DATA_DIR=/data/db
+        - MONGO_LOG_DIR=/dev/null
+    volumes:
+        - ./mongodb/data:/data/db
+        - ./mongodb/config:/data/configdb
+    command: mongod --smallfiles --logpath=/dev/null # --quiet
+#graphana    : 5.4.2
